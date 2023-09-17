@@ -1,38 +1,93 @@
-.App {
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: gray;
+  font-family: "Times New Roman";
+}
+
+.machine {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  color: gold;
+  background: purple;
+  border-radius: 10px;
+}
+
+.pads {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  color: gold;
+}
+
+.outerpad {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  background: gold;
+  border-radius: 50%;
+}
+
+.drum-pad {
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  vertical-align: middle;
+  line-height: 110px;
+  font-size: 30px;
+  background: black;
+  :hover {
+    font-size: 45px;
   }
+  
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.control-panel {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 40%;
+  height: 100%;
+  text-align: center;
+  background: purple;
+  border-left: 2px solid gold;
+}
+
+.label {
   color: white;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+  font-size: 24px;
 }
 
-.App-link {
-  color: #61dafb;
+.display {
+  background: red;
+  width: 250px;
+  height: 20px;
+  margin: 10px auto;
+  border: 1px solid black;
+  background: gold;
+  color: #111;
+}
+  
+.speakers {
+  margin-top: 50px;
+  padding: 10px;
+  hr {
+    padding: 1px;
+    height: 5px;
+    background: gold;
+    border: 1px solid black;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.power-button {
+  border: 1px solid gold;
+  cursor: pointer;
 }
