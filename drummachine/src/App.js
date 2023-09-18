@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const DATA = [
   { letter: 'Q',
@@ -54,23 +54,28 @@ const DATA = [
 function Pad({ key, pad, power, volume, updateDisplay }) {
   const [playing, setPlaying] = useState(false);
   
-  /* Do I need component mounting in functional components??
-  
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyPress);
-  }
-  
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyPress);
-  }
-  */
-  
-  const handleKeyPress = (e) => {
-    if (e.keyCode === pad.ascii) {
-      onPlay();
-    }
-    // THIS KEY PRESS DOES WORK ON APRIL 20, 2023, BUT IT SHOULD ALSO HIGHLIGHT THE BUTTONS PRESSED LIKE THE HOVER DOES, CURRENTLY IT DOES NOT
-  }
+/* guide to below useEffect update
+no need for component did mount / unmount, the useEffect deals with this 
+match the event key uppercased to the pad letter as a string.
+still require the addEventListener and removeEventListener to avoid memory leaks. keydown event
+the return function inside useEffect is a cleanup, remove the event listener when the component unmounts
+
+*/
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key.toUpperCase() === pad.letter) {
+        onPlay();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [pad.letter]);
+
   
   const onPlay = () => {
     if(power) {
@@ -153,13 +158,6 @@ function App() {
   /* these three methods are what the whole app needs to control - 
   is it on, change the display and change the volume, the individual drum pads don't control these. */
 
-  /*  
-  this.updateDisplay = this.updateDisplay.bind(this);
-  this.togglePower = this.togglePower.bind(this);
-  this.changeVolume = this.changeVolume.bind(this);
-  }
-  */
-  
   const updateDisplay = (id) => {
     setCurrentSound(id);
     setTimeout(() => {
